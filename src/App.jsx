@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Auth } from "./components/auth";
-import { db } from "./config/firebase";
+import { db, auth } from "./config/firebase";
 import {
   getDocs,
   collection,
@@ -48,6 +48,7 @@ function App() {
         title: newMovieTitle,
         releaseDate: newReleaseDate,
         receivedHeart: isReceivedHeart,
+        userId: auth?.currentUser?.uid,
       });
 
       getMovieList(); // update the movie list after submitting the new movie list.
@@ -118,7 +119,7 @@ function App() {
 
             <input
               type="text"
-              placeholder="update the title..."
+              placeholder="update the release date..."
               onChange={(e) => setUpdateReleaseDate(e.target.value)}
             />
             <button onClick={() => updateMovieTitle(movie.id)}>
